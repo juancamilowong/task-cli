@@ -42,7 +42,10 @@ class TaskCLI(cmd.Cmd):
         tasks.show_data(tasks.list_tasks(status))    
 
     def do_delete(self, id):
-        tasks.delete_task(id)
+        if tasks.task_exist(id) :
+            tasks.delete_task(id)
+        else:
+            print(f"Task with id {id} does not exist")
 
     def do_update(self, args):
         args = shlex.split(args)

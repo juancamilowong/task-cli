@@ -55,6 +55,11 @@ def save_task(task_list):
     
     show_data(task_dict)
 
+def task_exist(id):
+    task_list = load_tasks()
+    tasks_dict = [ task.to_dict() for task in task_list if task.id == int(id)]
+    return bool(len(tasks_dict) > 0)
+
 def add_task(description, status='TODO'):
     task_list = load_tasks()
     id = next_id([task.to_dict() for task in task_list])
