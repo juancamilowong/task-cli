@@ -39,7 +39,7 @@ class TaskCLI(cmd.Cmd):
         tasks.add_task(description=description.strip('\"'))
 
     def do_list(self, status):
-        print(tasks.list_tasks(status))    
+        tasks.show_data(tasks.list_tasks(status))    
 
     def do_delete(self, id):
         tasks.delete_task(id)

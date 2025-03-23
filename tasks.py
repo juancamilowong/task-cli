@@ -1,8 +1,10 @@
 import json
 import datetime
+import pandas as pd
 from collections import defaultdict
 from collections import namedtuple
 from json import JSONEncoder
+
 
 
 DATA_FILE = "task_list.json"
@@ -44,13 +46,14 @@ def load_tasks():
             tasks = json.load(data_file)
             return [Task.from_dict(task) for task in tasks]
     except FileNotFoundError:
-        print(f"File {DATA_FILE} not found")
         return []
         
 def save_task(task_list):
     task_dict = [task.to_dict() for task in task_list]
     with open(DATA_FILE, 'w') as data_file:
         json.dump(task_dict, data_file, indent=2)
+    
+    show_data(task_dict)
 
 def add_task(description, status='TODO'):
     task_list = load_tasks()
@@ -90,25 +93,18 @@ def update_task(id, *args, **kwargs):
         
         task_list[index].updatedAt = datetime.datetime.now()
         
-        print([task.to_dict() for task in task_list])
         save_task(task_list)
     else :
         print(f"Task with id {id} does not exist")
 
-# def show_data(data):
-#     df = pd.DataFrame.from_dict(data)
-#     print(df)
+def show_data(data):
+    df = pd.DataFrame.from_dict(data)
+    print("\n")
+    print(df)
+    print("\n")
 
 
 if __name__ == '__main__':
     task_list = load_tasks()
     list_dict = [task.to_dict() for task in task_list]
-    res = defaultdict(int)
-    for task in list_dict :
-        print(task['id'])
-        res['id'] = max(res['id'], task['id'])
-
-    print(res['id']) 
-
-
-
+    
