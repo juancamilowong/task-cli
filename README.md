@@ -2,6 +2,15 @@
 
 This task tracker allows you to add, update and change the status of your daily tasks
 
+## Prerequisites
+
+Before you begin ensure you have the following installed:
+
+- Python 3.10 or higher
+- Pandas
+- an accessible terminal
+
+
 ## Usage
 ### Initialization
 Initialization command to run the CLI
