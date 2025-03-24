@@ -36,6 +36,8 @@ Initialization command to run the CLI
 ```
 task_cli
 ```
+![Initialization screenshot](Images/initialization.png)
+
 ### Add 
 Add new tasks in TODO status
 
