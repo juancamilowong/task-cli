@@ -30,19 +30,53 @@ class TaskCLI(cmd.Cmd):
         return True
 
     def do_add(self, description):
-        """Add task"""
+        """
+        Add new task
+        
+        Args:
+         description (str): Task description
+
+        Returns:
+            None
+        """
         self.task_manager.add_task(description)
 
     def do_list(self, status):
-        """List tasks"""
+        """
+        List all tasks or filteres by status
+
+        Args:
+         status (str, optional): status of the task
+        
+        Returns:
+            None
+        """
         self.task_manager.show_task_table(status)
 
     def do_delete(self, _id):
-        """Delete task"""
+        """
+        Delete task by id
+        
+        Args:
+         _id (int): task id
+        
+        Returns:
+            None
+        """
         self.task_manager.delete_task(_id)
 
     def do_update(self, args):
-        """Update task"""
+        """
+        Update task decription by id
+        
+        Args:
+         _id (int): Task id
+         description (str): New task description
+        
+        Returns:
+            None
+
+        """
         args = shlex.split(args)
 
         if len(args) < 2:
@@ -53,11 +87,27 @@ class TaskCLI(cmd.Cmd):
             self.task_manager.update_task(args[0], description=args[1])
 
     def do_mark_in_progress(self, _id):
-        """Mark task status IN-PROGRESS"""
+        """
+        Mark task status IN-PROGRESS
+
+        Args:
+         _id (int): task id
+        
+        Returns:
+            None
+        """
         self.task_manager.update_task(_id, status="IN-PROGRESS")
 
     def do_mark_done(self, _id):
-        """Mark task status DONE"""
+        """
+        Mark task status DONE
+        
+        Args:
+         _id (int): task id
+        
+        Returns:
+            None
+        """
         self.task_manager.update_task(_id, status="DONE")
 
 
