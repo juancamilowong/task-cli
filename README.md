@@ -12,13 +12,30 @@ Before you begin ensure you have the following installed:
 
 
 ## Usage
+
+## Installation
+
+1. Clone repository
+```bash
+git clone https://github.com/tu-usuario/task_cli.git
+cd task_cli
+```
+2. Create virtual environment
+```bash
+python -m venv venv
+source venv/bin/activate   # En Linux/Mac
+venv\Scripts\activate      # En Windows
+```
+3. Install the module 
+```bash
+pip install -e .
+```
+
 ### Initialization
 Initialization command to run the CLI
 ```
-python3 task_cli.py
+task_cli
 ```
-![Initialization screenshot](Images/initialization.png)
-
 ### Add 
 Add new tasks in TODO status
 

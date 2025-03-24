@@ -4,7 +4,8 @@ Command line CLI to task tracking
 
 import cmd
 import shlex
-from tasks import (
+from IPython.display import display
+from task_cli.persistence import (
     add_task,
     delete_task,
     list_tasks,
@@ -63,7 +64,7 @@ class TaskCLI(cmd.Cmd):
 
     def do_list(self, status):
         """List tasks"""
-        show_data(list_tasks(status))
+        display(show_data(list_tasks(status)))
 
     def do_delete(self, _id):
         """Delete task"""
@@ -107,5 +108,5 @@ class TaskCLI(cmd.Cmd):
         update_task(int(_id), status="DONE")
 
 
-if __name__ == "__main__":
+def main():
     TaskCLI().cmdloop()

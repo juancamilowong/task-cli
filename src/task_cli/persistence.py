@@ -5,6 +5,7 @@ This module help in the JSON tasks management
 import json
 import datetime
 from collections import defaultdict
+from typing import List, Dict
 import pandas as pd
 
 
@@ -42,7 +43,7 @@ class Task:
         }
 
     @classmethod
-    def from_dict(cls, task_dict):
+    def from_dict(cls, task_dict: Dict[str, str]):
         """Return task class object"""
         return cls(
             task_dict["id"],
@@ -60,7 +61,7 @@ class Task:
             updated: {self.updated_at}"
 
 
-def load_json_file():
+def load_json_file() -> List[Task]:
     """Load task JSON file"""
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as data_file:
@@ -70,24 +71,22 @@ def load_json_file():
         return []
 
 
-def save_task(task_list):
+def save_task(task_list: List[Task]) -> None:
     """save dictionary list as JSON file """
     task_dict = [task.to_dict() for task in task_list]
     with open(DATA_FILE, "w", encoding="utf-8") as data_file:
         json.dump(task_dict, data_file, indent=2)
 
-    show_data(task_dict)
 
-
-def task_exist(_id):
+def task_exist(_id: int) -> bool:
     """Check if task id exists in JSON file"""
     task_list = load_json_file()
     tasks_dict = [task.to_dict() for task in task_list if task.id == int(_id)]
     return bool(len(tasks_dict) > 0)
 
 
-def add_task(description, status="TODO"):
-    """Ad new task"""
+def add_task(description: str, status: str="TODO") -> None:
+    """Add new task"""
     task_list = load_json_file()
     _id = next_id([task.to_dict() for task in task_list])
     task_list.append(Task(_id, description=description, status=status))
@@ -95,7 +94,7 @@ def add_task(description, status="TODO"):
     print(f"Task {description} added successfully (ID={_id})")
 
 
-def next_id(list_dict):
+def next_id(list_dict: List[Dict[str, str]]) -> int:
     """Get the next id number taking the lastone plus one"""
     res = defaultdict(int)
     for task in list_dict:
@@ -104,7 +103,7 @@ def next_id(list_dict):
     return int(res["id"]) + 1
 
 
-def list_tasks(status):
+def list_tasks(status: str) -> List[Dict[str, str]]:
     """List all tasks or filtered by status"""
     task_list = load_json_file()
     if bool(status and not status.isspace()):
@@ -112,13 +111,13 @@ def list_tasks(status):
     return [task.to_dict() for task in task_list]
 
 
-def delete_task(_id):
+def delete_task(_id: int) -> None:
     """Delete a task by id"""
     task_list = [task for task in load_json_file() if task.id != int(_id)]
     save_task(task_list)
 
 
-def update_task(_id, **kwargs):
+def update_task(_id: int, **kwargs) -> None:
     """Update task status or description"""
     task_list = load_json_file()
     index_list = [index for (index, item) in enumerate(task_list) if item.id == _id]
@@ -133,13 +132,12 @@ def update_task(_id, **kwargs):
         task_list[index].updated_at = datetime.datetime.now()
 
         save_task(task_list)
+        print(f"Task {_id} updated")
     else:
         print(f"Task with id {_id} does not exist")
 
 
-def show_data(data):
-    """Show JSON data as table"""
-    df = pd.DataFrame.from_dict(data)
-    print("\n")
-    print(df)
-    print("\n")
+def show_data(dict_list: List[Dict[str, str]]) -> pd.DataFrame:
+    """Return Json as dataframe"""
+    df = pd.DataFrame.from_dict(dict_list)
+    return df
