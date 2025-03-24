@@ -1,23 +1,39 @@
+"""
+Command line CLI to task tracking
+"""
+
 import cmd
 import shlex
-import tasks
+from tasks import (
+    add_task,
+    delete_task,
+    list_tasks,
+    show_data,
+    update_task,
+    task_exist
+)
 
 valid_status = ["TODO", "IN-PROGRESS", "DONE"]
 
 
 class TaskCLI(cmd.Cmd):
+    """Task cli class command prompt class"""
+
     intro = """Welcome to the task tracker, I am glad to help you with them.
     
     You can type help to check the valid commands.
     """
-
+    #pylint: disable=unused-argument
     def do_greet(self, arg):
+        """Greeting method"""
         print("Hello, I am here to help with your keep track of your tasks")
-
+    #pylint: disable=unused-argument, invalid-name)
     def do_EOF(self, arg):
+        """EOF"""
         return True
-
+    #pylint: disable=unused-argument
     def do_help(self, arg):
+        """Show help information"""
         print(
             """
             - Add new tasks: add <decription>
@@ -29,28 +45,34 @@ class TaskCLI(cmd.Cmd):
             - Mark task DONE:  mark_done <id>
 """
         )
-
+    #pylint: disable=unused-argument
     def do_quit(self, arg):
+        """Exit command prompt"""
         print("Exiting the console")
         return True
-
+    #pylint: disable=unused-argument
     def do_exit(self, arg):
+        """Exit command prompt"""
         print("Exiting the console")
         return True
 
     def do_add(self, description):
-        tasks.add_task(description=description.strip('"'))
+        """Ass task"""
+        add_task(description=description.strip('"'))
 
     def do_list(self, status):
-        tasks.show_data(tasks.list_tasks(status))
+        """List tasks"""
+        show_data(list_tasks(status))
 
-    def do_delete(self, id):
-        if tasks.task_exist(id):
-            tasks.delete_task(id)
+    def do_delete(self, _id):
+        """Delete task"""
+        if task_exist(_id):
+            delete_task(_id)
         else:
-            print(f"Task with id {id} does not exist")
+            print(f"Task with id {_id} does not exist")
 
     def do_update(self, args):
+        """Update task"""
         args = shlex.split(args)
 
         if len(args) < 2:
@@ -61,13 +83,15 @@ class TaskCLI(cmd.Cmd):
             task_id = int(args[0])
             description = args[1]
 
-            tasks.update_task(task_id, description=description)
+            update_task(task_id, description=description)
 
-    def do_mark_in_progress(seld, id):
-        tasks.update_task(int(id), status="IN-PROGRESS")
+    def do_mark_in_progress(self, _id):
+        """Mark task status IN-PROGRESS"""
+        update_task(int(_id), status="IN-PROGRESS")
 
-    def do_mark_done(seld, id):
-        tasks.update_task(int(id), status="DONE")
+    def do_mark_done(self, _id):
+        """Mark task status DONE"""
+        update_task(int(_id), status="DONE")
 
 
 if __name__ == "__main__":
