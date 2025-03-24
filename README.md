@@ -15,7 +15,7 @@ Before you begin ensure you have the following installed:
 ### Initialization
 Initialization command to run the CLI
 ```
-python3 task-cli.py
+python3 task_cli.py
 ```
 ![Initialization screenshot](Images/initialization.png)
 

@@ -14,6 +14,7 @@ from tasks import (
 )
 
 valid_status = ["TODO", "IN-PROGRESS", "DONE"]
+VALID_ID_MESSAGE = "Please, use a valid ID"
 
 
 class TaskCLI(cmd.Cmd):
@@ -66,6 +67,9 @@ class TaskCLI(cmd.Cmd):
 
     def do_delete(self, _id):
         """Delete task"""
+        if not _id.isnumeric() :
+            print(VALID_ID_MESSAGE)
+            return
         if task_exist(_id):
             delete_task(_id)
         else:
@@ -80,6 +84,9 @@ class TaskCLI(cmd.Cmd):
                 "Please type the correct arguments to update : update <id> <description>"
             )
         else:
+            if not args[0].isnumeric() :
+                print(VALID_ID_MESSAGE + " in position 1")
+                return
             task_id = int(args[0])
             description = args[1]
 
@@ -87,10 +94,16 @@ class TaskCLI(cmd.Cmd):
 
     def do_mark_in_progress(self, _id):
         """Mark task status IN-PROGRESS"""
+        if not _id.isnumeric() :
+            print(VALID_ID_MESSAGE)
+            return
         update_task(int(_id), status="IN-PROGRESS")
 
     def do_mark_done(self, _id):
         """Mark task status DONE"""
+        if not _id.isnumeric() :
+            print(VALID_ID_MESSAGE)
+            return
         update_task(int(_id), status="DONE")
 
 
