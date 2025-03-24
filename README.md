@@ -2,6 +2,20 @@
 
 This task tracker allows you to add, update and change the status of your daily tasks
 
+- [TASK TRACKER CLI](#task-tracker-cli)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Initialization](#initialization)
+    - [Add](#add)
+    - [List](#list)
+    - [Update](#update)
+    - [Mark](#mark)
+    - [Delete](#delete)
+    - [Help](#help)
+  - [Contributors](#contributors)
+  - [Project source](#project-source)
+
 ## Prerequisites
 
 Before you begin ensure you have the following installed:
@@ -9,9 +23,6 @@ Before you begin ensure you have the following installed:
 - Python 3.10 or higher
 - Pandas
 - an accessible terminal
-
-
-## Usage
 
 ## Installation
 
@@ -30,6 +41,7 @@ venv\Scripts\activate      # En Windows
 ```bash
 pip install -e .
 ```
+## Usage
 
 ### Initialization
 Initialization command to run the CLI
@@ -84,7 +96,7 @@ mark_in_progress 2
 mark_done 3
 ```
 ![mark-done screenshot](Images/md.png)
-## Delete 
+### Delete 
 
 Remove task using id
 
@@ -95,7 +107,7 @@ delete 1
 ```
 ![delete screenshot](Images/md.png)
 
-## Help
+### Help
 Show all the commands and their arguments
 ```
 help
