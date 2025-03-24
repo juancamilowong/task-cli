@@ -15,7 +15,9 @@ dependencies = [
     "pandas",
     "pylint",
     "black[jupyter]",
-    "pytest"
+    "pytest",
+    "pytest-mock",
+    "coverage"
 ]
 
 [tool.setuptools.packages.find]
@@ -23,3 +25,8 @@ where = ["src"]
 
 [project.scripts]
 task-cli = "task_cli.main:main"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]

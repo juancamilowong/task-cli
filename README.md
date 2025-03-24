@@ -21,7 +21,12 @@ This task tracker allows you to add, update and change the status of your daily 
 Before you begin ensure you have the following installed:
 
 - Python 3.10 or higher
-- Pandas
+- pandas
+- pylint
+- black[jupyter]
+- pytest
+- pytest-mock
+- coverage
 - an accessible terminal
 
 ## Installation
