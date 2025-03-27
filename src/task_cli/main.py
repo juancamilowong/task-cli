@@ -32,7 +32,7 @@ class TaskCLI(cmd.Cmd):
     def do_add(self, description):
         """
         Add new task
-        
+
         Args:
          description (str): Task description
 
@@ -47,7 +47,7 @@ class TaskCLI(cmd.Cmd):
 
         Args:
          status (str, optional): status of the task
-        
+
         Returns:
             None
         """
@@ -56,10 +56,10 @@ class TaskCLI(cmd.Cmd):
     def do_delete(self, _id):
         """
         Delete task by id
-        
+
         Args:
          _id (int): task id
-        
+
         Returns:
             None
         """
@@ -68,11 +68,11 @@ class TaskCLI(cmd.Cmd):
     def do_update(self, args):
         """
         Update task decription by id
-        
+
         Args:
          _id (int): Task id
          description (str): New task description
-        
+
         Returns:
             None
 
@@ -92,7 +92,7 @@ class TaskCLI(cmd.Cmd):
 
         Args:
          _id (int): task id
-        
+
         Returns:
             None
         """
@@ -101,10 +101,10 @@ class TaskCLI(cmd.Cmd):
     def do_mark_done(self, _id):
         """
         Mark task status DONE
-        
+
         Args:
          _id (int): task id
-        
+
         Returns:
             None
         """
